@@ -1,5 +1,8 @@
+require('dotenv').config()
+
 const express = require('express')
 const cors = require('cors')
+const Note = require('./models/note')
 const app = express()
 app.use(express.json())
 
@@ -11,35 +14,12 @@ const requestLogger = (request, response, next) => {
     next()
 }
 app.use(requestLogger)
-
-///MONGoose
-
-const mongoose = require('mongoose')
-
  
 
-const password = 'fullstackopen'
-const username = 'eanton71'
-const dbName = 'noteApp'
-const url =
-    `mongodb+srv://${username}:${password}@cluster19070.wvq4dny.mongodb.net/${dbName}?retryWrites=true&w=majority&appName=Cluster19070`
-
-mongoose.set('strictQuery', false)
-
-mongoose.connect(url)
-
-const noteSchema = new mongoose.Schema({
-    content: String,
-    important: Boolean,
-})
-
-const Note = mongoose.model('Note', noteSchema)
-
-
-///mongoose
+ 
 app.use(cors())
 app.use(express.static('dist'))
-let notes = [
+/*let notes = [
     {
         id: 1,
         content: "HTML is easy",
@@ -56,7 +36,7 @@ let notes = [
         important: true
     }
 ]
-
+*/
 
 const unknownEndpoint = (request, response) => {
     response.status(404).send({ error: 'unknown endpoint' })

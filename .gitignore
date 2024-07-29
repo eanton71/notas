@@ -11,6 +11,8 @@ coleccion
 currency
 node_modules 
 dist-ssr
+.env
+sample.env
 *.local
 
 # Editor directories and files

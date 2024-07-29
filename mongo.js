@@ -21,20 +21,57 @@ const noteSchema = new mongoose.Schema({
 })
 
 const Note = mongoose.model('Note', noteSchema)
+noteSchema.set('toJSON', {
+    transform: (document, returnedObject) => {
+        returnedObject.id = returnedObject._id.toString()
+        delete returnedObject._id
+        delete returnedObject.__v
+    }
+})
 /*
-const note = new Note({
+let note = new Note({
     content: 'HTML is easy',
     important: true,
 })
 
-note.save().then(result => {
-    console.log('note saved!')
-    mongoose.connection.close()
+let note1 = new Note({
+    content: 'Como me gusta el pasodoble',
+    important: false,
 })
-    */
+let note2 = new Note({
+    content: 'Browser can execute only JavaScript',
+    important: false,
+})
+let note3 = new Note({
+    content: 'GET and POST are the most important methods of HTTP protocol',
+    important: true,
+})
+Promise.all([note.save(),note1.save(), note2.save(), note3.save()])
+    .then(results => {
+        console.log('Notes saved!')
+        // Find all notes
+        Note.find({})
+            .then(notes => {
+                notes.forEach(note => {
+                    console.log(note)
+                })
+                mongoose.connection.close()
+            })
+            .catch(error => {
+                console.error('Error finding notes:', error)
+                mongoose.connection.close()
+            })
+    })
+    .catch(error => {
+        console.error('Error saving notes:', error)
+        mongoose.connection.close()
+    })
+ 
+ */
 Note.find({}).then(result => {
     result.forEach(note => {
         console.log(note)
     })
     mongoose.connection.close()
 })
+ 
