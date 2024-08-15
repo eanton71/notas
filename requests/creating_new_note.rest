@@ -1,10 +1,13 @@
-GET http://localhost:3001/api/notes/
 
 ###
-POST http://localhost:3001/api/notes/ HTTP/1.1
-content-type: application/json
+POST http://localhost:3001/api/notes/ 
+Content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im51ZXZvIiwiaWQiOiI2NmJhMWE0ZWM0NjZhODUwMTExNjIzZGUiLCJpYXQiOjE3MjM0NzcyMDV9.cTjOJJzZpptn0TrnXvxDdLcMINDnqnRvOng91YxCKPI
 
 {
-    "name": "gdfhgfdh",
-    "time": "Wed, 27 Oct 2015 18:27:50 GMT"
+    "content": "esta nota la ha creado nuevo, hola soy yo",
+    "important": true 
 }
+
+###
+GET http://localhost:3001/api/notes/
